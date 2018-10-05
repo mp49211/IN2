@@ -1,0 +1,265 @@
+<br>
+<div class='container'>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Detalji o projektu: <b>{{projekt.naziv}}</b></h3>
+        </div>
+        <div class="col-md-6">
+
+        </div>
+    </div>
+
+
+    <div><br></div>
+    <ngb-tabset>
+        <ngb-tab>
+            <ng-template ngbTabTitle><i class="fas fa-info-circle" style="color:black"></i>
+                <font color="black"> Opće informacije</font>
+            </ng-template>
+            <ng-template ngbTabContent>
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td class="text-success">
+                                <font color="black"> Naziv</font>
+                            </td>
+                            <td><b>{{projekt.naziv}}</b></td>
+                        </tr>
+                        <tr>
+                            <td class="text-success">
+                                <font color="black"> Opis</font>
+                            </td>
+                            <td><b>{{projekt.opis}}</b></td>
+                        </tr>
+                        <tr>
+                            <td class="text-success">
+                                <font color="black"> Ključne riječi</font>
+                            </td>
+                            <td><b>{{projekt.kljucneRijeci}}</b></td>
+                        </tr>
+                        <tr>
+                            <td class="text-success">
+                                <font color="black"> Faza</font>
+                            </td>
+                            <td><b>{{projekt.faza.naziv}}</b></td>
+                        </tr>
+                        <tr>
+                            <td class="text-success">
+                                <font color="black"> Tehnološki stack</font>
+                            </td>
+                            <td><b>{{projekt.stack.naziv}}</b></td>
+                        </tr>
+
+                        <tr>
+                            <td class="text-success">
+                                <font color="black"> Datum početka</font>
+                            </td>
+                            <td><b>{{projekt.datumPocetka | date:'dd/MM/yyyy'}}</b></td>
+                        </tr>
+                        <tr>
+                            <td class="text-success">
+                                <font color="black"> Datum završetka</font>
+                            </td>
+                            <td><b>{{projekt.datumZavrsetka | date:'dd/MM/yyyy'}}</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab>
+            <ng-template ngbTabTitle><i class="fa fa-users" style="color:black"></i>
+                <font color="black"> Sudionici</font>
+            </ng-template>
+            <ng-template ngbTabContent>
+
+                <ngb-accordion [closeOthers]="true" activeIds="static">
+                    <div *ngFor="let p of projekt.sudionici">
+                        <ngb-panel>
+                            <ng-template ngbPanelTitle>
+                                <div class="row">
+                                    <p style="color:black"><b style="color:black">{{p.imePrezime}} </b> -
+                                        {{p.nazivUloge}}</p>
+                                </div>
+
+                            </ng-template>
+                            <ng-template ngbPanelContent>
+                                <table class="table table-striped">
+                                    <tbody>
+                                        <tr>
+                                            <td class="text-success">
+                                                <font color="black"> OIB</font>
+                                            </td>
+                                            <td><b>{{p.oib}}</b></td>
+                                            <td class="text-success">
+                                                <font color="black"> Opis uloge</font>
+                                            </td>
+                                            <td><b>{{p.opisUloge}}</b></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success">
+                                                <font color="black"> Datum rođenja</font>
+                                            </td>
+                                            <td><b>{{p.datumRodenja | date:'dd/MM/yyyy'}}</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success">
+                                                <font color="black"> Zaposlen od</font>
+                                            </td>
+                                            <td><b>{{p.datumZaposlenja | date:'dd/MM/yyyy'}}</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success">
+                                                <font color="black"> Zaposlen do</font>
+                                            </td>
+                                            <td><b>{{p.datumOdlaska | date:'dd/MM/yyyy'}}</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success">
+                                                <font color="black"> Email adresa</font>
+                                            </td>
+                                            <td><b>{{p.email}}</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="text-success">
+                                                <font color="black"> Broj telefona</font>
+                                            </td>
+                                            <td><b>{{p.telefon}}</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text-success">
+                                                <font color="black"> Datum završetka</font>
+                                            </td>
+                                            <td><b>{{projekt.datumZavrsetka | date:'dd/MM/yyyy'}}</b></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </ng-template>
+                        </ngb-panel>
+                    </div>
+                </ngb-accordion>
+
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab>
+            <ng-template ngbTabTitle><i class="fas fa-code" style="color:black"></i>
+                <font color="black"> Tehnologije</font>
+            </ng-template>
+            <ng-template ngbTabContent>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="text-align: right; width: 30%;">Naziv</th>
+                            <th style="width: 70%">Opis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of projekt.tehnologije">
+                            <td align="right">{{p.naziv}}</td>
+                            <td>{{p.opis}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab>
+            <ng-template ngbTabTitle><i class="fas fa-briefcase" style="color:black"></i>
+                <font color="black"> Poslovna područja</font>
+            </ng-template>
+            <ng-template ngbTabContent>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="text-align: right; width: 30%;">Naziv</th>
+                            <th style="width: 70%">Opis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of projekt.podrucja">
+                            <td align="right">{{p.naziv}}</td>
+                            <td>{{p.opis}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </ng-template>
+        </ngb-tab>
+        <ngb-tab>
+            <ng-template ngbTabTitle><i class="fas fa-file-alt" style="color:black"></i>
+                <font color="black"> Dokumenti</font>
+            </ng-template>
+            <ng-template ngbTabContent>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th style="text-align: right; width: 20%;">Naziv</th>
+                            <th style="text-align: left;width: 75%">Opis</th>
+                            <th style="align-items: center; align-content: center; text-align: center; width: 5%;">Preuzmi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let p of projekt.dokumenti">
+                            <td align="right">{{p.naziv}}</td>
+                            <td>{{p.opis}}</td>
+                            <td><button style="align-self: center;" class="btn btn-basic"><a href="http://{{p.poveznica}}"
+                                        target="_blank"><i class="fas fa-download" style="color:black"></i></a></button></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </ng-template>
+        </ngb-tab>
+    </ngb-tabset>
+    <br>
+    <div class="row">
+        <div class="col-md-6">
+            <button class='btn btn-default' style="float:left" (click)='onBack()'>
+                <i class="fas fa-arrow-left" style="color:black"></i>
+                Natrag na popis
+            </button>
+        </div>
+        <div class="col-md-5">
+            <button class="btn btn-basic" style="float:right" (click)="uredi()"><i class="far fa-edit"></i> Uredi</button>
+
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-secondary" style="float:right" (click)="open(content)"><i style="color:white" class="far fa-trash-alt"></i>
+                Obriši</button>
+        </div>
+
+    </div>
+    <div class="row"></div>
+    <div><br></div>
+
+
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Obriši projekt</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+                <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Jeste li sigurni da želite obrisati projekt?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark btn-sm" style="float: left;" (click)="close()">Odustani</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" style="float: right;" (click)="obrisi()">Obriši</button>
+    </div>
+</ng-template>

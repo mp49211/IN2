@@ -1,0 +1,227 @@
+<div class="container">
+  <br>
+  <div class="card" *ngIf="!unosDokumenata">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-8">
+          <h3>Unos novog projekta</h3>
+        </div>
+        <div class="col-md-2">
+          <button type="submit" class="btn btn-basic" style="float:right" (click)="dodaj()"><i class="fas fa-save"
+              style="color:black"></i>
+            Stvori projekt
+          </button>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-basic" style="float:left" (click)="odustani()"><i class="fas fa-times" style="color:black"></i>
+            Odustani</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="naziv">Naziv</label>
+              <input type="text" class="form-control" id="naziv" [(ngModel)]="projekt.naziv" name="naziv">
+            </div>
+            <div class="form-group">
+              <label for="opis">Opis</label>
+              <textarea class="form-control" rows="5" id="opis" [(ngModel)]="projekt.opis" name="opis"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="rijeci">Ključne riječi (odvojene s ";")</label>
+              <textarea class="form-control" rows="5" id="rijeci" [(ngModel)]="projekt.kljucneRijeci" name="rijeci"></textarea>
+
+            </div>
+            <div class="form-group">
+              <label for="pocetak">Datum početka</label>
+              <input type="date" class="form-control" id="pocetak" [(ngModel)]="projekt.datumPocetka" name="pocetak">
+            </div>
+            <div class="form-group">
+              <label for="kraj">Datum završetka</label>
+              <input type="date" class="form-control" id="kraj" [(ngModel)]="projekt.datumZavrsetka" name="kraj">
+            </div>
+            <div class="form-group">
+              <label for="faza">Faza</label>
+              <select class="form-control" id="faza" [(ngModel)]="projekt.idFaze" name="faza">
+                <option *ngFor="let pow of faze" [value]="pow.idFaze">{{pow.naziv}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="stack">Tehnološki stack</label>
+              <select class="form-control" id="stack" [(ngModel)]="projekt.idStacka" name="stack">
+                <option *ngFor="let pow of stackovi" [value]="pow.idStacka">{{pow.naziv}}</option>
+              </select>
+            </div>
+
+
+          </div>
+          <div class="col-md-6">
+
+            <div class="row">
+              <div class="col-md-6">
+                <label for="tehno"><i class="fas fa-code" style="color:black"></i> Tehnologije:</label>
+                <div class="form-check" id="tehno" *ngFor="let pow of tehnologije">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" *ngIf="!pow.checked" [value]="pow.idTehnologije"
+                      (change)="tehnologijaCheck(pow,$event)">
+                    <input type="checkbox" class="form-check-input" *ngIf="pow.checked" [value]="pow.idTehnologije"
+                      (change)="tehnologijaCheck(pow,$event)" checked>{{pow.naziv}}
+                  </label>
+                </div>
+
+              </div>
+
+              <div class="col-md-6">
+                <label for="podr"><i class="fas fa-briefcase" style="color:black"></i> Poslovna područja:</label>
+                <div class="form-check" id="podr" *ngFor="let pow of podrucja">
+                  <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input" *ngIf="!pow.checked" [value]="pow.idPodrucja"
+                      (change)="podrucjeCheck(pow,$event)">
+                    <input type="checkbox" class="form-check-input" *ngIf="pow.checked" [value]="pow.idPodrucja"
+                      (change)="podrucjeCheck(pow,$event)" checked>{{pow.naziv}}
+                  </label>
+                </div>
+              </div>
+            </div>
+            <br>
+            <label for="typeahead-basic"><i class="fa fa-users" style="color:black"></i> Sudionici:</label>
+            <input id="typeahead-basic" type="text" placeholder="Pretraži..." class="form-control" name="tekst"
+              [(ngModel)]="tekst" [ngbTypeahead]="search" />
+            <br>
+
+            <table class="table table-striped" *ngIf="sudionici.length != 0">
+              <tbody>
+                <tr *ngFor="let s of sudionici.reverse()">
+                  <td><b>{{s.imePrezime}}</b></td>
+                  <td *ngIf="s.nazivUloge">{{s.nazivUloge}}</td>
+                  <td *ngIf="!s.nazivUloge">
+                    <div class="form-group">
+                      <select class="form-control" id="a" [(ngModel)]="s.nazivUloge" name="a">
+                        <option *ngFor="let pow of uloge" [value]="pow.naziv">{{pow.naziv}}</option>
+                      </select>
+                    </div>
+                  </td>
+                  <td>
+                    <button class="btn btn-danger btn-small float-left" style="float: right; border-radius: 50%"
+                      (click)="makni(s)"><i class="fas fa-times" style="color:white"></i>
+                    </button>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+            <button class="btn btn-outline-secondary" style="float: right" (click)="unesiDokumente()"><i class="fas fa-file-alt"
+                style="color:black"></i> Dokumenti
+            </button>
+
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="card" *ngIf="unosDokumenata">
+    <div class="card-header">
+      <div class="row">
+        <div class="col-md-8">
+          <h3>Dodaj dokumente</h3>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-basic" style="float:right" (click)="dodajDokumente()" *ngIf="!noviDok"><i class="fas fa-check"
+              style="color:black"></i>
+            Gotovo
+          </button>
+          <button class="btn btn-basic" style="float:right" (click)="dodajDokumente()" *ngIf="noviDok" disabled><i
+              class="fas fa-check" style="color:black"></i>
+            Gotovo
+          </button>
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-basic" style="float:left" (click)="odustaniDokumenti()"><i class="fas fa-times" style="color:black"></i>
+            Odustani</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <button class="btn btn-basic" style="float:left" (click)="noviDokument()" *ngIf="!noviDok"><i class="fas fa-plus"
+              style="color:black"></i>
+            Novi dokument</button>
+
+          <form *ngIf="noviDok">
+            <div class="form-group">
+              <label for="naziv">Naziv</label>
+              <input type="text" class="form-control" id="naziv" [(ngModel)]="noviDokumenti[broj].naziv" name="naziv">
+            </div>
+            <div class="form-group">
+              <label for="opis">Opis</label>
+              <textarea class="form-control" rows="5" id="opis" [(ngModel)]="noviDokumenti[broj].opis" name="opis"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="pov">Unesi poveznicu</label>
+              <input type="text" class="form-control" id="pov" [(ngModel)]="noviDokumenti[broj].poveznica" name="pov">
+            </div>
+            <p>Ili</p>
+            <div class="custom-file mb-3" lang="hr">
+              <input lang="hr" type="file" accept=".pdf,.doc,.docx" class="custom-file-input" id="customFile" name="filename"
+                (change)="onChange($event)">
+              <label lang="hr" class="custom-file-label" for="customFile" *ngIf="files.length > 0">{{files[0].name}}</label>
+              <label lang="hr" class="custom-file-label" for="customFile" *ngIf="files.length == 0">Odaberi datoteku</label>
+            </div>
+            <!-- <angular-file-uploader [config]="afuConfig">
+            </angular-file-uploader> -->
+            <!-- <div class="form-group">
+              <label for="avatar">Učitaj datoteku</label>
+              <label class="btn btn-default btn-file">
+                Browse <input type="file" style="display: none;">
+              </label>
+              <span class="btn btn-basic btn-file"><input type="file" id="avatar" (change)="onFileChange($event)"></span>
+              <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">Clear file</button>
+            </div> -->
+            <button type="submit" class="btn btn-basic" style="float:right" (click)="dodajDokument()">
+              Dodaj
+            </button>
+          </form>
+
+          <!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Bob" formControlName="name">
+              </div>
+              <div class="form-group">
+                <label for="avatar">Avatar</label>
+                <input type="file" id="avatar" (change)="onFileChange($event)" #fileInput>
+                <button type="button" class="btn btn-sm btn-default" (click)="clearFile()">clear file</button>
+              </div>
+              <button type="submit" [disabled]="form.invalid || loading" class="btn btn-success">Submit <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i></button>
+            </form> -->
+
+
+        </div>
+        <div class="col-md-6">
+          <table class="table table-striped" *ngIf="brojac > 0">
+            <tbody>
+              <tr *ngFor="let s of dokumenti">
+                <td><b>{{s.naziv}}</b></td>
+                <td>
+                  <button class="btn btn-danger btn-small float-left" style="float: right; border-radius: 50%" (click)="makniDok(s)"><i
+                      class="fas fa-times" style="color:white"></i>
+                  </button>
+                </td>
+                <td><button style="align-self: center;" class="btn btn-basic"><a href="http://{{s.poveznica}}" target="_blank"><i
+                        class="fas fa-download" style="color:black"></i></a></button></td>
+              </tr>
+            </tbody>
+          </table>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+{
+  "name": "angular-bootstrap-autocomplete",
+  "version": "1.0.1",
+  "description": "A simple autocomplete component for Angular and Bootstrap",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DGarvanski/angular-bootstrap-autocomplete.git"
+  },
+  "keywords": [
+    "angular",
+    "bootstrap",
+    "autocomplete",
+    "typescript"
+  ],
+  "author": "Deyan Garvanski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DGarvanski/angular-bootstrap-autocomplete/issues"
+  },
+  "homepage": "https://github.com/DGarvanski/angular-bootstrap-autocomplete#readme"
+}

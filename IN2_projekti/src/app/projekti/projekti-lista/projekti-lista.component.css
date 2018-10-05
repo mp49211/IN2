@@ -1,0 +1,28 @@
+.example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+
+  .animated.animated-fast {
+    animation-duration: 0.3s;
+    animation-fill-mode: both;
+  }
+  
+  .bs-autocomplete-container {
+    position: relative;
+  }
+  
+  .bs-autocomplete-input {
+    margin-bottom: 15px;
+  }
+  
+  .bs-autocomplete-menu {
+    position: absolute;
+    top: 100%;
+    z-index: 9
+  }

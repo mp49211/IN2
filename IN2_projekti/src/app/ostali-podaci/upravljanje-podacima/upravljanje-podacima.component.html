@@ -1,0 +1,19 @@
+<h3>Upravljanje podacima</h3>
+  <div><br></div>
+  <div class="jumbotron" style="align-items: center; text-align: center; vertical-align: middle">
+      <ngb-accordion [closeOthers]="true" activeIds="static">
+              <ngb-panel>
+                  <ng-template ngbPanelTitle>
+                      <div class="row">
+                          <p style="color:black"><b style="color:black">Zaposlenici</b></p>
+                      </div>
+
+                  </ng-template>
+                  <ng-template ngbPanelContent>
+                      <button class="btn btn-basic" style="float:right" (click)="uredi()"><i class="far fa-plus"></i> Novi zaposlenik</button>
+                      <button class="btn btn-basic" style="float:right" (click)="uredi()"><i class="far fa-edit"></i> Uredi zaposlenike</button>
+                  </ng-template>
+              </ngb-panel>
+      </ngb-accordion>
+
+  </div>

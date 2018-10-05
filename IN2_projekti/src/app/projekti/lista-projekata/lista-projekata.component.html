@@ -1,0 +1,130 @@
+<div class="container">
+  <br>
+  <h3>Projekti</h3>
+  <div><br></div>
+  <div class="jumbotron" style="align-items: center; text-align: center; vertical-align: middle" *ngIf="gumbi">
+
+    <button class="btn btn-secondary btn-block btn-lg" style="float: none;" (click)="postaviPretragu1()"><i class="fas fa-search"
+        style="color:white"></i>
+      Pretraži po sudionicima, fazi i tehnološkom stacku</button>
+
+    <button class="btn btn-secondary btn-block btn-lg" (click)="postaviPretragu2()"><i class="fas fa-search" style="color:white"></i>
+      Pretraži po ključnoj riječi, tehnologiji i poslovnom području</button>
+
+    <button class="btn btn-secondary btn-block btn-lg" style="float:none" (click)="noviProjekt()"><i class="fas fa-plus"
+        style="color:white"></i>
+      Novi projekt</button>
+
+  </div>
+
+
+  <div class="row" *ngIf="pretraga1 || pretraga2">
+    <div class="col-md-12">
+      <button class="btn btn-basic" style="float: right;" (click)="novaPretraga()"><i class="fas fa-plus" style="color:black"></i>
+        Nova pretraga</button></div>
+  </div>
+  <form *ngIf="pretraga1">
+    <div class="row">
+      <div class="col-md-4">
+        <label for="typeahead-basic">Sudionik</label>
+        <input id="typeahead-basic" type="text" placeholder="Pretraži..." class="form-control" name="tekst" [(ngModel)]="tekst"
+          [ngbTypeahead]="search" />
+
+      </div>
+
+      <div class="col-md-4">
+
+        
+        <div class="form-group">
+          <label for="faza">Faza</label>
+          <select class="form-control" id="faza" [(ngModel)]="odabranaFaza" name="faza">
+            <option [value]=-1><b>--nije odabrano--</b></option>
+            <option *ngFor="let pow of faze2" [value]="pow.idFaze">{{pow.naziv}}</option>
+          </select>
+        </div>
+
+
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="stack">Tehnološki stack</label>
+          <select class="form-control" id="stack" [(ngModel)]="odabraniStack" name="stack">
+              <option [value]=-1><b>--nije odabrano--</b></option>
+            <option *ngFor="let pow of stackovi2" [value]="pow.idStacka">{{pow.naziv}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10"></div>
+      <div class="col-md-2"><button type="submit" class="btn btn-basic btn-lg" style="float:right" (click)="pretrazi()"><i
+            class="fas fa-search" style="color:black"></i>
+          Pretraži</button></div>
+    </div>
+
+  </form>
+  <form *ngIf="pretraga2">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="rijec">Ključna riječ</label>
+          <input type="text" placeholder="Pretraži..." class="form-control" id="rijec" [(ngModel)]="kljucnaRijec" name="rijec">
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="faza">Tehnologija</label>
+          <select class="form-control" id="faza" [(ngModel)]="odabranaTehnologija" name="faza">
+              <option [value]=-1><b>--nije odabrano--</b></option>
+            <option *ngFor="let pow of tehnologije" [value]="pow.idTehnologije">{{pow.naziv}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="stack">Poslovno područje</label>
+          <select class="form-control" id="stack" [(ngModel)]="odabranoPodrucje" name="stack">
+              <option [value]=-1><b>--nije odabrano--</b></option>
+            <option *ngFor="let pow of podrucja" [value]="pow.idPodrucja">{{pow.naziv}}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10"></div>
+      <div class="col-md-2"><button type="submit" class="btn btn-basic btn-lg" style="float:right" (click)="pretrazi()"><i
+            class="fas fa-search" style="color:black"></i>
+          Pretraži</button></div>
+    </div>
+
+  </form>
+
+
+
+  <div><br></div>
+
+  <table class="table table-striped" *ngIf="filtriraniProjekti3.length!=0">
+    <thead>
+      <tr>
+        <th>Naziv</th>
+        <th>Faza</th>
+        <th>Tehnološki stack</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of filtriraniProjekti3">
+        <td>{{p.naziv}}</td>
+        <td>{{p.faza.naziv}}</td>
+        <td>{{p.stack.naziv}}</td>
+        <td>
+          <button class="btn btn-basic" [routerLink]="['/projekt',p.idProjekta]">Detalji</button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+
+
+</div>

@@ -1,0 +1,65 @@
+<div class="container">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-8">
+            <h3>Uredi podatke o zaposleniku: {{osoba.imePrezime}}</h3>
+          </div>
+          <div class="col-md-2">
+            <button type="submit" class="btn btn-basic" style="float:right" (click)="dodaj()"><i class="fas fa-save"
+                style="color:black"></i>
+              Gotovo
+            </button>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-basic" style="float:left" (click)="odustani()"><i class="fas fa-times" style="color:black"></i>
+              Odustani</button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="naziv">Ime</label>
+            <input type="text" class="form-control" id="naziv" [(ngModel)]="osoba.ime" name="naziv" required>
+            <p style="color:red" *ngIf="submit && osoba.ime==''">Ime je obavezno polje!</p>
+          </div>
+          <div class="form-group">
+            <label for="a">Prezime</label>
+            <input type="text" class="form-control" id="a" [(ngModel)]="osoba.prezime" name="a">
+            <p style="color:red" *ngIf="submit && osoba.prezime==''">Prezime je obavezno polje!</p>
+          </div>
+          <div class="form-group">
+            <label for="b">OIB</label>
+            <input type="text" class="form-control" id="b" [(ngModel)]="osoba.oib" name="b">
+            <p style="color:red" *ngIf="submit && osoba.oib==''">OIB je obavezno polje!</p>
+          </div>
+  
+          <div class="form-group">
+              <label for="pocetak">Datum rođenja</label>
+              <input type="date" class="form-control" id="pocetak" [value]="osoba.datumRodenja | date:'yyyy-MM-dd'"
+                (input)="osoba.datumRodenja=parseDate($event.target.value)" name="pocetak">
+            </div>
+          <div class="form-group">
+              <label for="pocetak">Datum zaposlenja</label>
+              <input type="date" class="form-control" id="zap" [value]="osoba.datumZaposlenja | date:'yyyy-MM-dd'"
+                (input)="osoba.datumZaposlenja=parseDate($event.target.value)" name="zap">
+            </div>
+            <div class="form-group">
+                <label for="pocetak">Datum prestanka rada</label>
+                <input type="date" class="form-control" id="kraj" [value]="osoba.datumOdlaska | date:'yyyy-MM-dd'"
+                  (input)="osoba.datumOdlaska=parseDate($event.target.value)" name="kraj">
+              </div>
+          <div class="form-group">
+            <label for="g">Email adresa</label>
+            <input type="text" class="form-control" id="g" [(ngModel)]="osoba.email" name="g">
+          </div>
+          <div class="form-group">
+            <label for="z">Broj telefona</label>
+            <input type="text" class="form-control" id="z" [(ngModel)]="osoba.telefon" name="z">
+          </div>
+  
+        </form>
+      </div>
+    </div>
+  </div>

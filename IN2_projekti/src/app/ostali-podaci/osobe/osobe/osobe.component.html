@@ -1,0 +1,60 @@
+
+
+<div class="container">
+    <br>
+    <div class="row">
+      <div class="col-md-4">
+          <h3>Zaposlenici</h3>
+      </div>
+      <div class="col-md-4">
+          <input type="text" class="form-control" id="searchTextId" [(ngModel)]="search" name="searchText" placeholder="Pretraži...">
+     
+      </div>
+      <div class="col-md-4">
+          <button class="btn btn-basic" style="float: right;" (click)="novi()"><i class="fas fa-plus"></i> Novi zaposlenik</button>
+      </div>
+    </div>
+    
+    <br>
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th style="width:30%">Ime i prezime</th>
+        <th style="width:20%">OIB</th>
+        <th style="width:20%">Zaposlen od</th>
+        <th style="width:20%"></th>
+      </tr>
+    </thead>
+    <tbody>
+    
+
+ <tr *ngFor="let p of (osobe | osobe: search)">
+        <td>{{ p.imePrezime }}</td>
+        <td>{{ p.oib }}</td>
+        <td>{{ p.datumZaposlenja | date:'dd/MM/yyyy' }}</td>
+        <td>
+            <button class="btn btn-outline-dark" style="float:left" [routerLink]="['/uredi-osobu',p.idOsobe]"><i class="far fa-edit" ></i> Uredi</button>
+            <button class="btn btn-outline-danger" style="float:right" (click)="open(content, p.idOsobe)"><i class="far fa-trash-alt"></i>
+              Obriši</button>
+        </td>
+      </tr> 
+     
+    </tbody>
+  </table>
+</div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Obriši zaposlenika</h4>
+        <button type="button" class="close" aria-label="Close" (click)="close()">
+                <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Jeste li sigurni da želite obrisati zaposlenika?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark btn-sm" style="float: left;" (click)="close()">Odustani</button>
+        <button type="button" class="btn btn-outline-danger btn-sm" style="float: right;" (click)="obrisi()">Obriši</button>
+    </div>
+</ng-template>
