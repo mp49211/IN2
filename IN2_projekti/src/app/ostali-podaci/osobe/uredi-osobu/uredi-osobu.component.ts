@@ -29,6 +29,7 @@ export class UrediOsobuComponent implements OnInit {
   }
 
   dodaj() {
+    console.log(this.osoba.datumZaposlenja)
     this.submit = true;
     if (this.osoba.ime != '' && this.osoba.prezime != '' && this.osoba.oib != '') {
       this.osoba.imePrezime = this.osoba.ime + " " + this.osoba.prezime;
@@ -47,6 +48,14 @@ export class UrediOsobuComponent implements OnInit {
   odustani(): void {
     let url = this.routerService.getPreviousUrl();
     this.router.navigate([url]);
+  }
+
+  parseDate(dateString: string): Date {
+    if (dateString) {
+      return new Date(dateString);
+    } else {
+      return null;
+    }
   }
 
 }

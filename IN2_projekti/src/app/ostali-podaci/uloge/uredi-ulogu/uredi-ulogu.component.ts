@@ -12,6 +12,7 @@ import { Uloga } from '../../../models/uloga';
 export class UrediUloguComponent implements OnInit {
 
   uloga: Uloga;
+  submit: boolean = false;
 
   constructor(private productService: ProjektiService, private route: ActivatedRoute, private router: Router, private routerService: RouterService) { }
 
@@ -25,9 +26,8 @@ export class UrediUloguComponent implements OnInit {
   }
 
   dodaj() {
-    if (this.uloga.naziv != null) {
-
-
+    this.submit = true;
+    if (this.uloga.naziv != '') {
       this.productService.putUloga(this.uloga).subscribe(res => {
         let url = this.routerService.getPreviousUrl();
         this.router.navigate(['/uloge']);
